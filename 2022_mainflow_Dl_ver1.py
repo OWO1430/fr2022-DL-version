@@ -634,7 +634,7 @@ while True:
 		if ret1 and ret3:
 			frontFrame = cv2.resize(frontFrame, (640, 480))
 			frontFrame = cv2.flip(frontFrame, -1)
-			sideFrame = cv2.resize(sideFrame, (640, 480))
+			# sideFrame = cv2.resize(sideFrame, (640, 480))
 			waterFrame = cv2.rotate(waterFrame, cv2.ROTATE_90_COUNTERCLOCKWISE)
 			waterFrame = cv2.resize(waterFrame, (640, 480))
 			maskName['signShow'] = frontFrame.copy()

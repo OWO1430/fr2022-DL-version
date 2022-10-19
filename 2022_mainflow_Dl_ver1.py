@@ -243,6 +243,7 @@ def fruitDetect_DL(fruit_class, save_img=False, source='', weights='', view_img=
 	global stateinput
 	global motorOutput, taskOutput, motorOrTask
 	global waterCap
+	global motorOrTask
 	if waterCap.isOpened():
 		waterCap.release()
 	
@@ -290,6 +291,7 @@ def fruitDetect_DL(fruit_class, save_img=False, source='', weights='', view_img=
 		img = torch.from_numpy(img).to(device)
 		img = img.half() if half else img.float()  # uint8 to fp16/32
 		img /= 255.0  # 0 - 255 to 0.0 - 1.0
+		motorOutput = "032032\n"
 
 		# if change state *******************
 		if serinput == 1:
@@ -369,13 +371,13 @@ def fruitDetect_DL(fruit_class, save_img=False, source='', weights='', view_img=
 					cv2.imshow(str(p), im0)
 					cv2.waitKey(1)  # 1 millisecond
 					# cv2.line(maskName['tubeShow'], (setposition, 0), (setposition, 480), (0, 255, 0), 1)
-				if motorOrTask:
-					ser.write(motorOutput.encode('utf-8'))
-					print('----ser motor----')
-				else:
-					ser.write(taskOutput.encode('utf-8'))
-					print('----ser task----')
-					print(taskOutput)
+			if motorOrTask:
+				ser.write(motorOutput.encode('utf-8'))
+				print('----ser motor----')
+			else:
+				ser.write(taskOutput.encode('utf-8'))
+				print('----ser task----')
+				print(taskOutput)
 			if ending == True:	  
 				print("second_break")	
 				break
@@ -628,7 +630,8 @@ while True:
 		ret1, frontFrame = frontCap.read()
 		# ret2, sideFrame = sideCap.read()
 		ret3, waterFrame = waterCap.read()
-		if ret1 and ret2 and ret3:
+		# if ret1 and ret2 and ret3:
+		if ret1 and ret3:
 			frontFrame = cv2.resize(frontFrame, (640, 480))
 			frontFrame = cv2.flip(frontFrame, -1)
 			sideFrame = cv2.resize(sideFrame, (640, 480))

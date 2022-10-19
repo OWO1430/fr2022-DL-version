@@ -21,7 +21,7 @@ from utils.torch_utils import select_device, load_classifier, time_synchronized,
 #---------------------------
 
 stateinput = 0
-ser = serial.Serial('COM17', 9600)
+ser = serial.Serial('/dev/ttyUSB0', 9600)
 motorOutput = "000000\n"
 taskOutput = "900000\n"
 motorOrTask = True 	#decide to send which output to arduino (true motor/ false task)

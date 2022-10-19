@@ -356,10 +356,10 @@ def fruitDetect_DL(fruit_class, save_img=False, source='', weights='', view_img=
 						point = str(int(int(xyxy[0])+int(xyxy[2])/2))
 						if point < setposition + 10 and point > setposition - 10:
 							taskoutput = "900010\n"
+							motorOrTask = False
 							ending = True
 						else:
 							motorOutput = "032032\n"
-						
 
 						print("tomato!",(int(xyxy[0])+int(xyxy[2]))/2)
 					# if state == 2:
@@ -368,7 +368,14 @@ def fruitDetect_DL(fruit_class, save_img=False, source='', weights='', view_img=
 				if view_img:
 					cv2.imshow(str(p), im0)
 					cv2.waitKey(1)  # 1 millisecond
-					cv2.line(maskName['tubeShow'], (setposition, 0), (setposition, 480), (0, 255, 0), 1)
+					# cv2.line(maskName['tubeShow'], (setposition, 0), (setposition, 480), (0, 255, 0), 1)
+				if motorOrTask:
+					ser.write(motorOutput.encode('utf-8'))
+					print('----ser motor----')
+				else:
+					ser.write(taskOutput.encode('utf-8'))
+					print('----ser task----')
+					print(taskOutput)
 			if ending == True:	  
 				print("second_break")	
 				break

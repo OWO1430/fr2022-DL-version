@@ -595,7 +595,7 @@ def switch():
 
 variables['colorCode'] = 0
 frontCap = cv2.VideoCapture(0)
-sideCap = cv2.VideoCapture(2)
+# sideCap = cv2.VideoCapture(2)
 waterCap = cv2.VideoCapture(1)
 
 #loadmodel
@@ -626,7 +626,7 @@ while True:
 			state = 9
 			print('change state to 9')
 		ret1, frontFrame = frontCap.read()
-		ret2, sideFrame = sideCap.read()
+		# ret2, sideFrame = sideCap.read()
 		ret3, waterFrame = waterCap.read()
 		if ret1 and ret2 and ret3:
 			frontFrame = cv2.resize(frontFrame, (640, 480))
@@ -657,6 +657,6 @@ while True:
 		break
 		
 frontCap.release()
-sideCap.release()
+# sideCap.release()
 waterCap.release()
 cv2.destroyAllWindows()

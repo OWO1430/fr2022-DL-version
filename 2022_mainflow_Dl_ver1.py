@@ -631,7 +631,7 @@ while True:
 			maskName['potShow'] = frontFrame.copy()
 			maskName['tubeShow'] = frontFrame.copy()
 			maskAll()
-			switch()
+			fruitDetect_DL(1)
 			# fruitDetect()
 			# cv2.imshow('front', frontFrame)
 			# cv2.imshow('side', sideFrame)
